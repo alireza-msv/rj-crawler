@@ -117,10 +117,10 @@ const getArtistsMp3s = async (continuous = true, interval = 1000) => {
 
       if (continuous && interval) {
         setTimeout(() => {
-          getArtistsMp3s();
+          getArtistsMp3s(continuous, interval);
         }, interval);
       } else if (continuous) {
-        getArtistsMp3s();
+        getArtistsMp3s(continuous, interval);
       }
     }
   } else {
