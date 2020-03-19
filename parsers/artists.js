@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 
-const getArtists = async (html) => {
+const getArtists = (html) => {
   const $ = cheerio.load(html);
   const container = $('#artists_videos_container a');
   const artists = Array
