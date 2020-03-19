@@ -3,6 +3,9 @@ const { version } = require('./package.json');
 const mp3sCommands = require('./cmds/mp3s');
 const artistsCommands = require('./cmds/artists');
 const albumsCommands = require('./cmds/albums');
+const { sync: syncAlbums } = require('./db/albums');
+const { sync: syncArtists } = require('./db/artists');
+const { sync: syncMp3s } = require('./db/mp3s');
 
 const parseOptions = (options) => {
   const continuous = Boolean(options.continuous);
@@ -19,6 +22,7 @@ program
   .option('--page <page>')
   .option('--continuous')
   .option('--interval <interval>')
+  .option('--force')
   .on('command:artists', async ([cmd]) => {
     const options = program.opts();
     const { continuous, interval, page } = parseOptions(options);
@@ -66,6 +70,13 @@ program
       default:
         console.log('command not found');
     }
+  })
+  .on('command:sync', async () => {
+    const force = Boolean(program.opts().force);
+
+    await syncAlbums(force);
+    await syncArtists(force);
+    await syncMp3s(force);
   });
 
 program.parse(process.argv);
