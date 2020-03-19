@@ -39,7 +39,9 @@ program
       default:
         console.log('command not found');
     }
-  })
+  });
+
+program
   .command('mp3s <cmd>')
   .description('crawl RadioJavan for mp3s or details of mp3s')
   .action(async (cmd) => {
@@ -59,7 +61,9 @@ program
       default:
         console.log('command not found');
     }
-  })
+  });
+
+program
   .command('albums <cmd>')
   .description('crawl RadioJavan form albums or get album tracks list')
   .action(async (cmd) => {
@@ -76,7 +80,9 @@ program
       default:
         console.log('command not found');
     }
-  })
+  });
+
+program
   .command('sync')
   .description('sync database tables model with db file')
   .action(async () => {
