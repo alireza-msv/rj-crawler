@@ -23,7 +23,9 @@ program
   .option('--continuous')
   .option('--interval <interval>')
   .option('--force')
-  .on('command:artists', async ([cmd]) => {
+  .command('artists <cmd>')
+  .description('crawl RadioJavan for artists')
+  .action(async (cmd) => {
     const options = program.opts();
     const { continuous, interval, page } = parseOptions(options);
 
@@ -38,7 +40,9 @@ program
         console.log('command not found');
     }
   })
-  .on('command:mp3s', async ([cmd]) => {
+  .command('mp3s <cmd>')
+  .description('crawl RadioJavan for mp3s or details of mp3s')
+  .action(async (cmd) => {
     const options = program.opts();
     const { continuous, interval, page } = parseOptions(options);
 
@@ -56,7 +60,9 @@ program
         console.log('command not found');
     }
   })
-  .on('command:albums', async ([cmd]) => {
+  .command('albums <cmd>')
+  .description('crawl RadioJavan form albums or get album tracks list')
+  .action(async (cmd) => {
     const options = program.opts();
     const { continuous, interval } = parseOptions(options);
 
@@ -71,7 +77,9 @@ program
         console.log('command not found');
     }
   })
-  .on('command:sync', async () => {
+  .command('sync')
+  .description('sync database tables model with db file')
+  .action(async () => {
     const force = Boolean(program.opts().force);
 
     await syncAlbums(force);
