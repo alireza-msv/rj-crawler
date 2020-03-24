@@ -9,10 +9,10 @@ const crawlMp3sPage = (html) => {
     .map((item) => {
       const $item = $(item);
       const name = $item.find('.song').text();
-      const perma = $item.attr('href').substring(10);
+      const perma = encodeURIComponent($item.attr('href').substring(10));
       const albumArt = $item.find('img').attr('src');
       const artistName = $item.find('.artist').text();
-      const artistPerma = encodeURIComponent(artistName.replace(/\s/g, '+'));
+      const artistPerma = encodeURIComponent(encodeURIComponent(artistName.replace(/\s/g, '+')));
 
       return {
         name,
