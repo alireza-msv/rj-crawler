@@ -37,6 +37,12 @@ const getArtistsAlbums = async (continuous = true, interval = 1000) => {
       } else if (continuous) {
         getArtistsAlbums(continuous, interval);
       }
+    } else if (response.status === 302) {
+      artist.status = 'MOVED';
+      await artist.save();
+    } else if (response.status === 404) {
+      artist.status = 'ERROR';
+      await artist.save();
     }
   } else {
     console.log('there\'s no artist left');
